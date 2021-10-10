@@ -30,26 +30,33 @@ const ProgressBar = ({ value, size }) => {
       aria-valuemax="100"
       style={styles}
     >
-      <Bar value={value} size={size}></Bar>
+      <BarWrapper size={size}>
+        <Bar value={value}></Bar>
+      </BarWrapper>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   background-color: ${COLORS.transparentGray15};
-  border-radius: var(--border-radius);
+
   box-shadow: inset 0px 2px 4px ${COLORS.transparentGray35};
   width: 370px;
+  border-radius: var(--border-radius);
   height: var(--height);
   padding: var(--padding);
 `;
 
+const BarWrapper = styled.div`
+  border-radius: 4px;
+  overflow: hidden;
+  height: 100%;
+`;
+
 const Bar = styled.div`
   width: ${(p) => `${p.value}%`};
+  border-radius: 4px 0 0 4px;
   height: 100%;
-  border-radius: ${(props) => (props.size === "large" ? `4px` : "inherit")};
-  border-top-right-radius: ${(props) => props.value !== 100 && "0px"};
-  border-bottom-right-radius: ${(props) => props.value !== 100 && "0px"};
   background-color: ${COLORS.primary};
 `;
 
